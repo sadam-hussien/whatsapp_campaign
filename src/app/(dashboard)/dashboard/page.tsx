@@ -93,7 +93,7 @@ export default async function Page({
           <TableContainer isEmpty={!campaignsData || !campaignsData.length}>
             <TableThead>
               <TableTr>
-                <TableTh title="ID" />
+                {/* <TableTh title="ID" /> */}
                 <TableTh title="title" />
                 <TableTh title="message type" />
                 <TableTh title="message" />
@@ -101,15 +101,15 @@ export default async function Page({
                 <TableTh title="count" />
                 <TableTh title="remaining" />
                 <TableTh title="status" />
-                <TableTh title="sending_at" />
-                <TableTh title="updated at" />
+                <TableTh title="sending at" />
+                {/* <TableTh title="updated at" /> */}
                 <TableTh title="actions" />
               </TableTr>
             </TableThead>
             <TableTbody>
               {campaignsData.map((campData: Type_Campaign_Model) => (
                 <TableTr key={campData?.id}>
-                  <TableTd title={campData?.id} />
+                  {/* <TableTd title={campData?.id} /> */}
                   <TableTd title={campData?.title.slice(0, 30)} />
                   <TableTd
                     title={campData?.message_type}
@@ -145,11 +145,6 @@ export default async function Page({
                   />
                   <TableTd
                     title={moment(campData?.sending_at).format(
-                      "MMMM Do YYYY, h:mm:ss a",
-                    )}
-                  />
-                  <TableTd
-                    title={moment(campData.updated_at).format(
                       "MMMM Do YYYY, h:mm:ss a",
                     )}
                   />

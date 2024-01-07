@@ -37,9 +37,9 @@ export default function ViewForm({
       ) : (
         <>
           {campaignData && campaignData.length
-            ? campaignData.map((item) =>
+            ? campaignData.map((item, index) =>
                 Object.entries(item).map((inner: any) => (
-                  <div>
+                  <div key={inner[0] + index}>
                     {inner[0]}: {inner[1]}
                   </div>
                 )),
