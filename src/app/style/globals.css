@@ -1,0 +1,218 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+::placeholder {
+  text-transform: capitalize;
+  font-size: 0.875rem;
+}
+
+.my-select.select-focused {
+  outline-width: 1px !important;
+  outline-style: dashed !important;
+  outline-color: hsl(var(--p) / 1) !important;
+}
+
+.join-item:nth-child(2) {
+  border-start-start-radius: 999px !important;
+  border-end-start-radius: 999px !important;
+}
+
+.join-item:nth-last-child(2) {
+  border-start-end-radius: 999px !important;
+  border-end-end-radius: 999px !important;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+.animation-container {
+  display: inline-block;
+  font-size: 36px;
+  text-align: center;
+  position: relative;
+}
+
+.animation-container span {
+  display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Customize individual span animations */
+.animation-container span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.animation-container span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.animation-container span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.animation-container span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.animation-container span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.animation-container span:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}
+
+.underline {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  height: 8px;
+  width: 100%;
+  border: 1px solid theme("colors.base-content");
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.underline::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: theme("colors.primary");
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  animation: animloader 2s linear infinite;
+}
+
+.image-overlay::after {
+  content: attr(data-count);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 55;
+  background-color: rgba(0 0 0 / 0.5);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border-radius: 0.25rem;
+}
+
+.page-loading .loader {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: theme("colors.accent-content") theme("colors.accent-content")
+    transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.page-loading .loader::after,
+.page-loading .loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent theme("colors.primary")
+    theme("colors.primary");
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+.page-loading .loader::before {
+  width: 50px;
+  height: 50px;
+  border-color: theme("colors.accent-content") theme("colors.accent-content")
+    transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* actions  */
+
+.actions-wrapper > div:not(:last-child) button {
+  position: relative;
+}
+
+.actions-wrapper > div:not(:last-child) button::after {
+  content: "";
+  border: 1px solid theme("colors.base-content");
+  opacity: 0.2;
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  right: calc(-1 * theme("spacing.base"));
+}
+
+/* modal  */
+.modal-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* [class^="datepicker-input"] {
+  width: 100%;
+} */
+
+.tui-datepicker-input {
+  height: 100% !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.tui-datepicker-input input {
+  @apply bg-base-100 input input-bordered w-full focus:outline-primary/60 focus:outline-1 focus:outline-dashed;
+}
