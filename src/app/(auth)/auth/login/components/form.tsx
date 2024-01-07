@@ -19,6 +19,7 @@ import { useAppDispatch } from "@/hooks/useRedux";
 import { saveUserData } from "@/store/globalReducer";
 
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 // form validation schema
 const schema = Yup.object().shape({
@@ -46,15 +47,19 @@ export default function Form() {
   // submit function
   function onSubmit(data: Type_Login_Inputs) {
     // save user data in store
-    dispatch(
-      saveUserData({
-        // @ts-ignore
-        data: { name: "mahmoud", email: "m.hus.dev@gmail.com", active: true },
-        token: "token",
-      }),
-    );
-    // redirect user to dashboard screen
-    router.replace("/");
+    if (data.user === "m.dev@gmail.com" && data.password === "123456") {
+      dispatch(
+        saveUserData({
+          // @ts-ignore
+          data: { name: "mahmoud", email: "m.dev@gmail.com", active: true },
+          token: "token",
+        }),
+      );
+      // redirect user to dashboard screen
+      router.replace("/");
+    } else {
+      toast.error("wrong credentials");
+    }
   }
 
   return (

@@ -21,3 +21,7 @@ export function api_add_campaign(data: FormData): AxiosPromise {
 export function api_get_single_campaign(id: number | string): AxiosPromise {
   return setupAxios().get(`campaigns/${id}`);
 }
+
+export function api_edit_campaign(id: number | string) {
+  return setupAxios().patch(`campaigns/${id}`);
+}

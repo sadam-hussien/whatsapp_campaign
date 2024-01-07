@@ -57,8 +57,6 @@ export default async function Page({
   // roles data
   const campaignsData = data?.data?.data;
 
-  console.log("campaignsData", campaignsData);
-
   return (
     <>
       <Transition options={pages_transition_default}>
