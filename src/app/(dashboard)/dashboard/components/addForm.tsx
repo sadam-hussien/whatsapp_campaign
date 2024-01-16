@@ -26,6 +26,8 @@ import { TuiDatePicker } from "nextjs-tui-date-picker";
 
 import moment from "moment";
 
+import UploadExcelSheetWithPhones from "./uploadExcelSheetWithPhones";
+
 // form validation schema
 const schema = Yup.object().shape({
   phones: Yup.string().required("this field is required"),
@@ -61,6 +63,7 @@ export default function AddForm({
     register,
     formState: { errors },
     setValue,
+
     watch,
   } = formMethods;
 
@@ -106,6 +109,14 @@ export default function AddForm({
 
   const urlValue = watch("url");
 
+  function handlePreview(file: any) {
+    if (typeof file === "string") {
+      return file;
+    }
+
+    return URL.createObjectURL(file);
+  }
+
   return (
     <>
       <form
@@ -120,17 +131,24 @@ export default function AddForm({
 
         {/* name  */}
         <div className="mb-lg">
-          <Input
-            {...register("phones")}
-            inputProps={{
-              placeholder: "phone",
-              type: "text",
-              id: "create_new-camp-form-phone",
-            }}
-            className="!bg-base-100"
-            label="phone"
-            error={errors.phones?.message}
-          />
+          <div className="flex flex-row-reverse flex-wrap items-center gap-md">
+            {/* @ts-ignore */}
+            <UploadExcelSheetWithPhones setValue={setValue} />
+
+            <div className="flex-1">
+              <Input
+                {...register("phones")}
+                inputProps={{
+                  placeholder: "phone",
+                  type: "text",
+                  id: "create_new-camp-form-phone",
+                }}
+                className="!bg-base-100"
+                label="phone"
+                error={errors.phones?.message}
+              />
+            </div>
+          </div>
         </div>
         {/* ************* */}
 
@@ -188,18 +206,43 @@ export default function AddForm({
           />
           <label
             htmlFor="create_new-camp-form-add_attachment"
-            className="h-[150px] w-full flex items-center justify-center input input-bordered bg-base-100 relative "
+            className="h-[200px] w-full flex items-center justify-center input input-bordered bg-base-100 relative "
           >
             {urlValue?.length ? (
-              <img
-                src={
-                  typeof urlValue === "string"
-                    ? urlValue
-                    : // @ts-ignore
-                      window.URL.createObjectURL(urlValue[0])
+              <>
+                {typeof urlValue === "string" && (
+                  <img src={urlValue} className="max-h-[180px]" />
+                )}
+
+                {
+                  // @ts-ignore
+                  urlValue && urlValue[0].type.includes("image") && (
+                    <img
+                      // @ts-ignore
+                      src={window.URL.createObjectURL(urlValue[0])}
+                      className="max-h-[180px]"
+                    />
+                  )
                 }
-                className="max-h-[120px]"
-              />
+
+                {
+                  // @ts-ignore
+                  urlValue && urlValue[0].type.includes("video") && (
+                    <video height="150" controls>
+                      <source
+                        // @ts-ignore
+                        src={window.URL.createObjectURL(urlValue[0])}
+                        type="video/mp4"
+                      />
+                      <source
+                        // @ts-ignore
+                        src={window.URL.createObjectURL(urlValue[0])}
+                        type="video/ogg"
+                      />
+                    </video>
+                  )
+                }
+              </>
             ) : (
               <i className="las la-cloud-upload-alt absolute text-[50px]"></i>
             )}
