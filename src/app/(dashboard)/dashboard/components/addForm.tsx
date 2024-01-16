@@ -251,7 +251,7 @@ export default function AddForm({
         {/* ************* */}
 
         {/* submit */}
-        <div className="flex gap-md pt-md">
+        <div className="flex flex-wrap gap-md pt-md">
           <Btn
             type="submit"
             label="submit"
@@ -263,7 +263,7 @@ export default function AddForm({
           <Btn
             type="button"
             label="cancel"
-            className="btn-neutral"
+            className="btn-neutral min-w-full min-[420px]:min-w-[150px]"
             onClick={hideModal}
             disabled={isLoading}
           />
